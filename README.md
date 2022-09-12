@@ -59,7 +59,7 @@ To maintain generalizability to other L1/L2 chains, Unfold runtimes expect two i
 
 The lexing/parsing of Unfold is handled by [nearleyjs](https://nearley.js.org/docs/index), which returns an abstract syntax tree in JSON. This tree is passed off to simple interpreter written in vanilla Javascript. 
 
-An example of an AST (for the first example in <code>example_queries.txt</code>) is shown below.
+An example of an AST (for the first example in <a href="https://github.com/varunshenoy/unfold-lang/blob/main/example_queries.txt"><code>example_queries.txt</code></a>) is shown below.
 
 <pre>
 [
