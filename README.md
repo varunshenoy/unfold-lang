@@ -1,4 +1,4 @@
-# Unfold
+![Logo](logo.png)
 
 Unfold is a lightweight, domain-specific language for querying crypto wallets. It currently supports various operations, such as checking the ETH, ERC20, or ERC721 balance, on a single wallet address. 
 
