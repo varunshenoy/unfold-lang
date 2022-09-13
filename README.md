@@ -17,11 +17,11 @@ Unfold is available on npm. Just run the following command in your project.
 npm i unfold-lang
 </pre>
 
-You can also manually install Unfold. This is useful if you want to make significant changes to the interpreter architecture. Just clone the repo (or manually install it) and run <code>npm install</code> in the directory.
+You can also manually install Unfold. This is useful if you want to make significant changes to the interpreter architecture. Just clone the repo (or download it) and run <code>npm install</code> in its corresponding directory.
 
 ## Set Up
 
-After installation, you can get started in < 15 lines of code. 
+After installation, you can get started in <15 lines of code. 
 
 <pre>
 // 1. Import the context and runtime
@@ -50,6 +50,8 @@ async function run() {
 run();
 </pre>
 
+Check out <a href="https://github.com/varunshenoy/unfold-lang/blob/main/example.js">example.js</a> to see a full example.
+
 
 ## Under the Hood
 
@@ -57,7 +59,7 @@ Every time any Unfold code is written, a separate runtime instance needs to be c
 
 To maintain generalizability to other L1/L2 chains, Unfold runtimes expect two inputs: the written code and a wallet context. Wallet contexts are responsible for providing methods and attributes that interact with the chain, such as `address`, `queryNativeToken()`, `queryToken(tokenType, tokenAddress)`, and `setChain(chainId)`. 
 
-The lexing/parsing of Unfold is handled by [nearleyjs](https://nearley.js.org/docs/index), which returns an abstract syntax tree in JSON. This tree is passed off to simple interpreter written in vanilla Javascript. 
+The lexing/parsing of Unfold is handled by [nearleyjs](https://nearley.js.org/docs/index), which returns an abstract syntax tree in JSON using a grammar specified in <a href="https://github.com/varunshenoy/unfold-lang/blob/main/lang/grammar.ne"><code>grammar.ne</code></a>. This tree is passed off to simple recursive interpreter written in vanilla Javascript. 
 
 An example of an AST (for the first example in <a href="https://github.com/varunshenoy/unfold-lang/blob/main/example_queries.txt"><code>example_queries.txt</code></a>) is shown below.
 
@@ -75,6 +77,10 @@ An example of an AST (for the first example in <a href="https://github.com/varun
   { operator: 'return', value: 'usdc' }
 ]
 </pre>
+
+A diagram highlighting the architecture of composing Unfold within one of your projects is shown below.
+
+![Runtime Overview](runtime.png)
 
 ## Writing Scripts
 
@@ -106,6 +112,8 @@ The only type of variable in Unfold is a token. A token can be defined as follow
 </pre>
 
 There is also a special TokenObject `ETH` that queries the amount of Ether in a given wallet address.
+
+Unfold supports a unique address accessor through the `$` object. You can check how much of a token the current wallet has by using `$.balanceOf(TokenName)`. You can get the address of the current wallet with $.address, which can be used for whitelisting.
 
 Any condition or value can be returned from the Unfold runtime through the `return` command.
 
